@@ -1,0 +1,109 @@
+ad_name,ad_type,state,device,impr,reach,clicks,purchases
+Best Sellers Video,Video,California,desktop,208,132,4,0
+Best Sellers Video,Video,California,mobile,437,365,11,0
+Best Sellers Video,Video,California,tablet,125,99,2,0
+Best Sellers Video,Video,Florida,desktop,71,57,1,0
+Best Sellers Video,Video,Florida,mobile,248,197,5,0
+Best Sellers Video,Video,Florida,tablet,32,27,1,0
+Best Sellers Video,Video,Illinois,desktop,94,57,2,0
+Best Sellers Video,Video,Illinois,mobile,147,94,3,0
+Best Sellers Video,Video,Illinois,tablet,85,59,1,0
+Best Sellers Video,Video,New York,desktop,199,145,4,0
+Best Sellers Video,Video,New York,mobile,472,273,12,0
+Best Sellers Video,Video,New York,tablet,42,33,1,0
+Best Sellers Video,Video,Texas,desktop,269,212,5,0
+Best Sellers Video,Video,Texas,mobile,254,141,6,0
+Best Sellers Video,Video,Texas,tablet,103,76,1,0
+Best Sellers Video,Video,Washington,desktop,140,110,3,0
+Best Sellers Video,Video,Washington,mobile,325,273,8,0
+Best Sellers Video,Video,Washington,tablet,50,42,1,0
+Free Shipping Promo,Image,California,desktop,119,69,2,0
+Free Shipping Promo,Image,California,mobile,527,304,11,0
+Free Shipping Promo,Image,California,tablet,57,43,1,0
+Free Shipping Promo,Image,Florida,desktop,111,69,2,0
+Free Shipping Promo,Image,Florida,mobile,243,167,6,0
+Free Shipping Promo,Image,Florida,tablet,25,20,1,0
+Free Shipping Promo,Image,Illinois,desktop,68,39,1,0
+Free Shipping Promo,Image,Illinois,mobile,342,204,6,0
+Free Shipping Promo,Image,Illinois,tablet,30,24,1,0
+Free Shipping Promo,Image,New York,desktop,333,211,6,0
+Free Shipping Promo,Image,New York,mobile,359,235,7,0
+Free Shipping Promo,Image,New York,tablet,107,60,1,0
+Free Shipping Promo,Image,Texas,desktop,79,54,1,0
+Free Shipping Promo,Image,Texas,mobile,342,217,7,0
+Free Shipping Promo,Image,Texas,tablet,52,36,1,0
+Free Shipping Promo,Image,Washington,desktop,219,165,3,0
+Free Shipping Promo,Image,Washington,mobile,260,177,6,0
+Free Shipping Promo,Image,Washington,tablet,45,34,1,0
+New Arrivals Collection,Collection,California,desktop,415,232,7,0
+New Arrivals Collection,Collection,California,mobile,275,158,7,0
+New Arrivals Collection,Collection,California,tablet,80,43,1,0
+New Arrivals Collection,Collection,Florida,desktop,301,171,5,0
+New Arrivals Collection,Collection,Florida,mobile,447,296,10,0
+New Arrivals Collection,Collection,Florida,tablet,62,42,1,0
+New Arrivals Collection,Collection,Illinois,desktop,144,97,2,0
+New Arrivals Collection,Collection,Illinois,mobile,492,394,11,0
+New Arrivals Collection,Collection,Illinois,tablet,99,68,1,0
+New Arrivals Collection,Collection,New York,desktop,224,132,4,0
+New Arrivals Collection,Collection,New York,mobile,127,74,3,0
+New Arrivals Collection,Collection,New York,tablet,86,53,1,0
+New Arrivals Collection,Collection,Texas,desktop,116,93,3,0
+New Arrivals Collection,Collection,Texas,mobile,237,139,5,0
+New Arrivals Collection,Collection,Texas,tablet,181,118,3,0
+New Arrivals Collection,Collection,Washington,desktop,127,79,2,0
+New Arrivals Collection,Collection,Washington,mobile,176,123,3,0
+New Arrivals Collection,Collection,Washington,tablet,27,20,1,0
+Retargeting Dynamic Ads,Dynamic,California,desktop,246,163,8,1
+Retargeting Dynamic Ads,Dynamic,California,mobile,657,478,19,1
+Retargeting Dynamic Ads,Dynamic,California,tablet,124,70,3,0
+Retargeting Dynamic Ads,Dynamic,Florida,desktop,212,178,5,0
+Retargeting Dynamic Ads,Dynamic,Florida,mobile,285,197,9,1
+Retargeting Dynamic Ads,Dynamic,Florida,tablet,126,89,3,0
+Retargeting Dynamic Ads,Dynamic,Illinois,desktop,52,28,1,0
+Retargeting Dynamic Ads,Dynamic,Illinois,mobile,401,338,12,1
+Retargeting Dynamic Ads,Dynamic,Illinois,tablet,46,37,1,0
+Retargeting Dynamic Ads,Dynamic,New York,desktop,658,557,16,1
+Retargeting Dynamic Ads,Dynamic,New York,mobile,549,314,20,1
+Retargeting Dynamic Ads,Dynamic,New York,tablet,61,47,1,0
+Retargeting Dynamic Ads,Dynamic,Texas,desktop,414,312,10,1
+Retargeting Dynamic Ads,Dynamic,Texas,mobile,478,363,14,1
+Retargeting Dynamic Ads,Dynamic,Texas,tablet,190,122,4,0
+Retargeting Dynamic Ads,Dynamic,Washington,desktop,261,213,6,1
+Retargeting Dynamic Ads,Dynamic,Washington,mobile,142,93,5,0
+Retargeting Dynamic Ads,Dynamic,Washington,tablet,191,110,4,0
+Spring Sale Carousel,Carousel,California,desktop,417,229,8,0
+Spring Sale Carousel,Carousel,California,mobile,522,323,14,1
+Spring Sale Carousel,Carousel,California,tablet,108,79,2,0
+Spring Sale Carousel,Carousel,Florida,desktop,396,216,8,0
+Spring Sale Carousel,Carousel,Florida,mobile,312,216,9,0
+Spring Sale Carousel,Carousel,Florida,tablet,62,39,1,0
+Spring Sale Carousel,Carousel,Illinois,desktop,167,143,4,0
+Spring Sale Carousel,Carousel,Illinois,mobile,373,219,10,0
+Spring Sale Carousel,Carousel,Illinois,tablet,39,31,1,0
+Spring Sale Carousel,Carousel,New York,desktop,408,349,8,1
+Spring Sale Carousel,Carousel,New York,mobile,409,227,12,1
+Spring Sale Carousel,Carousel,New York,tablet,96,62,2,0
+Spring Sale Carousel,Carousel,Texas,desktop,281,229,6,0
+Spring Sale Carousel,Carousel,Texas,mobile,457,286,10,0
+Spring Sale Carousel,Carousel,Texas,tablet,125,100,2,0
+Spring Sale Carousel,Carousel,Washington,desktop,232,135,6,0
+Spring Sale Carousel,Carousel,Washington,mobile,381,211,11,0
+Spring Sale Carousel,Carousel,Washington,tablet,50,33,1,0
+Weekend Flash Sale,Image,California,desktop,277,196,4,0
+Weekend Flash Sale,Image,California,mobile,276,210,6,0
+Weekend Flash Sale,Image,California,tablet,86,61,1,0
+Weekend Flash Sale,Image,Florida,desktop,180,130,3,0
+Weekend Flash Sale,Image,Florida,mobile,315,211,7,0
+Weekend Flash Sale,Image,Florida,tablet,25,20,1,0
+Weekend Flash Sale,Image,Illinois,desktop,175,109,3,0
+Weekend Flash Sale,Image,Illinois,mobile,216,141,3,0
+Weekend Flash Sale,Image,Illinois,tablet,40,29,1,0
+Weekend Flash Sale,Image,New York,desktop,452,319,8,0
+Weekend Flash Sale,Image,New York,mobile,141,102,3,0
+Weekend Flash Sale,Image,New York,tablet,59,36,1,0
+Weekend Flash Sale,Image,Texas,desktop,247,136,5,0
+Weekend Flash Sale,Image,Texas,mobile,147,108,3,0
+Weekend Flash Sale,Image,Texas,tablet,63,35,1,0
+Weekend Flash Sale,Image,Washington,desktop,89,55,1,0
+Weekend Flash Sale,Image,Washington,mobile,140,80,3,0
+Weekend Flash Sale,Image,Washington,tablet,79,46,1,0

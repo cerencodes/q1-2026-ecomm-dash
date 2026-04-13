@@ -1,0 +1,169 @@
+---
+title: "Q1 2026 Facebook Ads Dashboard"
+subtitle: "Dashboard for a fictional Facebook ads campaign"
+format:
+  dashboard:
+    orientation: rows
+    theme: cosmo
+    scrolling: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| context: setup
+library(tidyverse)
+library(scales)
+library(bslib)
+library(gt)
+
+raw_data <- readr::read_csv("facebook_ads_mock_q1_2026.csv", show_col_types = FALSE)
+
+total_impr <- sum(raw_data$impr, na.rm = TRUE)
+total_clicks <- sum(raw_data$clicks, na.rm = TRUE)
+total_purchases <- sum(raw_data$purchases, na.rm = TRUE)
+
+ad_name_breakdown <- raw_data |>
+  group_by(ad_name) |>
+  summarise(
+    Impr = sum(impr, na.rm = TRUE),
+    Clicks = sum(clicks, na.rm = TRUE),
+    Purchases = sum(purchases, na.rm = TRUE),
+    CTR = ifelse(Impr == 0, 0, Clicks / Impr),
+    `Conv Rate` = ifelse(Clicks == 0, 0, Purchases / Clicks),
+    .groups = "drop"
+  ) |>
+  arrange(desc(Purchases), desc(Clicks), desc(Impr))
+
+ad_type_breakdown <- raw_data |>
+  group_by(ad_type) |>
+  summarise(
+    Impr = sum(impr, na.rm = TRUE),
+    Clicks = sum(clicks, na.rm = TRUE),
+    Purchases = sum(purchases, na.rm = TRUE),
+    CTR = ifelse(Impr == 0, 0, Clicks / Impr),
+    `Conv Rate` = ifelse(Clicks == 0, 0, Purchases / Clicks),
+    .groups = "drop"
+  ) |>
+  arrange(desc(Purchases), desc(Clicks), desc(Impr))
+
+device_breakdown <- raw_data |>
+  group_by(device) |>
+  summarise(
+    Impr = sum(impr, na.rm = TRUE),
+    Clicks = sum(clicks, na.rm = TRUE),
+    Purchases = sum(purchases, na.rm = TRUE),
+    CTR = ifelse(Impr == 0, 0, Clicks / Impr),
+    `Conv Rate` = ifelse(Clicks == 0, 0, Purchases / Clicks),
+    .groups = "drop"
+  ) |>
+  arrange(desc(Purchases), desc(Clicks), desc(Impr))
+
+state_breakdown <- raw_data |>
+  group_by(state) |>
+  summarise(
+    Impr = sum(impr, na.rm = TRUE),
+    Clicks = sum(clicks, na.rm = TRUE),
+    Purchases = sum(purchases, na.rm = TRUE),
+    CTR = ifelse(Impr == 0, 0, Clicks / Impr),
+    `Conv Rate` = ifelse(Clicks == 0, 0, Purchases / Clicks),
+    .groups = "drop"
+  ) |>
+  arrange(desc(Purchases), desc(Clicks), desc(Impr))
+```
+
+## Row {height="12%"}
+
+### Column {width="34%"}
+
+```{r}
+bslib::value_box(
+  title = "Total Impr",
+  value = comma(total_impr),
+  showcase = NULL,
+  theme = "primary",
+  min_height = "80px"
+)
+```
+
+### Column {width="33%"}
+
+```{r}
+bslib::value_box(
+  title = "Total Clicks",
+  value = comma(total_clicks),
+  showcase = NULL,
+  theme = "success",
+  min_height = "80px"
+)
+```
+
+### Column {width="33%"}
+
+```{r}
+bslib::value_box(
+  title = "Total Purchases",
+  value = comma(total_purchases),
+  showcase = NULL,
+  theme = "warning",
+  min_height = "80px"
+)
+```
+
+## Row
+
+### Column {width="60%"}
+
+::: {.card title="Performance by Ad Name"}
+```{r}
+ad_name_breakdown |>
+  select(ad_name, Impr, Clicks, Purchases, CTR, `Conv Rate`) |>
+  rename(`Ad Name` = ad_name) |>
+  gt() |>
+  fmt_number(columns = c(Impr, Clicks, Purchases), decimals = 0, use_seps = TRUE) |>
+  fmt_percent(columns = c(CTR, `Conv Rate`), decimals = 1)
+```
+:::
+
+### Column {width="40%"}
+
+::: {.card title="Performance by Ad Type"}
+```{r}
+ad_type_breakdown |>
+  select(ad_type, Impr, Clicks, Purchases, CTR, `Conv Rate`) |>
+  rename(`Ad Type` = ad_type) |>
+  gt() |>
+  fmt_number(columns = c(Impr, Clicks, Purchases), decimals = 0, use_seps = TRUE) |>
+  fmt_percent(columns = c(CTR, `Conv Rate`), decimals = 1)
+```
+:::
+
+## Row
+
+### Column {width="40%"}
+
+::: {.card title="Performance by Device"}
+```{r}
+device_breakdown |>
+  select(device, Impr, Clicks, Purchases, CTR, `Conv Rate`) |>
+  rename(Device = device) |>
+  gt() |>
+  fmt_number(columns = c(Impr, Clicks, Purchases), decimals = 0, use_seps = TRUE) |>
+  fmt_percent(columns = c(CTR, `Conv Rate`), decimals = 1)
+```
+:::
+
+### Column {width="60%"}
+
+::: {.card title="Performance by State"}
+```{r}
+state_breakdown |>
+  select(state, Impr, Clicks, Purchases, CTR, `Conv Rate`) |>
+  rename(State = state) |>
+  gt() |>
+  fmt_number(columns = c(Impr, Clicks, Purchases), decimals = 0, use_seps = TRUE) |>
+  fmt_percent(columns = c(CTR, `Conv Rate`), decimals = 1)
+```
+:::
