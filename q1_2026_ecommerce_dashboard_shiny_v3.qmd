@@ -1,0 +1,202 @@
+---
+title: "Q1 2026 Ecommerce Dashboard"
+subtitle: "Dashboard for a fictional ecommerce website"
+format:
+  dashboard:
+    orientation: rows
+    theme: cosmo
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| context: setup
+library(tidyverse)
+library(lubridate)
+library(scales)
+library(forcats)
+library(bslib)
+library(gt)
+
+raw_data <- readr::read_csv("mock_ecommerce_dashboard_q1_2026.csv", show_col_types = FALSE) |>
+  mutate(
+    date = as.Date(date),
+    month = floor_date(date, unit = "month"),
+    month_label = factor(format(month, "%b %Y"), levels = c("Jan 2026", "Feb 2026", "Mar 2026")),
+    source_medium = paste(source, medium, sep = " / ")
+  )
+
+total_sessions <- sum(raw_data$sessions, na.rm = TRUE)
+total_purchases <- sum(raw_data$purchases, na.rm = TRUE)
+conversion_rate <- ifelse(total_sessions == 0, 0, total_purchases / total_sessions)
+
+monthly_data <- raw_data |>
+  group_by(month, month_label) |>
+  summarise(
+    sessions = sum(sessions, na.rm = TRUE),
+    purchases = sum(purchases, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  pivot_longer(
+    cols = c(sessions, purchases),
+    names_to = "metric",
+    values_to = "value"
+  ) |>
+  mutate(metric = recode(metric, sessions = "Sessions", purchases = "Purchases"))
+
+device_data <- raw_data |>
+  group_by(device) |>
+  summarise(purchases = sum(purchases, na.rm = TRUE), .groups = "drop") |>
+  filter(purchases > 0) |>
+  arrange(desc(purchases)) |>
+  mutate(
+    share = purchases / sum(purchases),
+    label = percent(share, accuracy = 0.1)
+  )
+
+state_data <- raw_data |>
+  group_by(state) |>
+  summarise(purchases = sum(purchases, na.rm = TRUE), .groups = "drop") |>
+  arrange(desc(purchases), state) |>
+  slice_head(n = 5) |>
+  mutate(state = fct_reorder(state, purchases))
+
+source_medium_breakdown <- raw_data |>
+  group_by(source_medium) |>
+  summarise(
+    Sessions = sum(sessions, na.rm = TRUE),
+    Purchases = sum(purchases, na.rm = TRUE),
+    `Conversion Rate` = ifelse(Sessions == 0, 0, Purchases / Sessions),
+    .groups = "drop"
+  ) |>
+  arrange(desc(Purchases), desc(Sessions))
+```
+
+## Row {height="12%"}
+
+### Column {width="40%"}
+
+```{r}
+bslib::value_box(
+  title = "Total Sessions",
+  value = comma(total_sessions),
+  showcase = NULL,
+  theme = "primary",
+  min_height = "80px"
+)
+```
+
+### Column {width="40%"}
+
+```{r}
+bslib::value_box(
+  title = "Total Purchases",
+  value = comma(total_purchases),
+  showcase = NULL,
+  theme = "success",
+  min_height = "80px"
+)
+```
+
+### Column {width="20%"}
+
+```{r}
+bslib::value_box(
+  title = "Conversion Rate",
+  value = percent(conversion_rate, accuracy = 0.1),
+  showcase = NULL,
+  theme = "warning",
+  min_height = "80px"
+)
+```
+
+## Row {height="42%"}
+
+### Column {width="65%"}
+
+::: {.card title="Purchases vs Sessions by Month"}
+```{r}
+ggplot(monthly_data, aes(x = month, y = value, color = metric, group = metric)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  geom_text(aes(label = comma(value)), vjust = -0.8, size = 3.5, show.legend = FALSE) +
+  scale_x_date(
+    breaks = unique(monthly_data$month),
+    labels = label_date("%b %Y")
+  ) +
+  scale_y_continuous(labels = comma) +
+  labs(
+    x = NULL,
+    y = NULL,
+    color = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "top",
+    panel.grid.minor = element_blank()
+  )
+```
+:::
+
+### Column {width="35%"}
+
+::: {.card title="Purchases by Device"}
+```{r}
+if (nrow(device_data) == 0) {
+  ggplot() +
+    annotate("text", x = 1, y = 1, label = "No purchases available", size = 6) +
+    theme_void()
+} else {
+  ggplot(device_data, aes(x = "", y = purchases, fill = device)) +
+    geom_col(width = 1, color = "white") +
+    geom_text(
+      aes(label = label),
+      position = position_stack(vjust = 0.5),
+      color = "white",
+      size = 4,
+      fontface = "bold"
+    ) +
+    coord_polar(theta = "y") +
+    labs(x = NULL, y = NULL, fill = "Device") +
+    theme_void(base_size = 12) +
+    theme(legend.position = "right")
+}
+```
+:::
+
+## Row {height="34%"}
+
+### Column {width="45%"}
+
+::: {.card title="Top 5 States by Purchases"}
+```{r}
+ggplot(state_data, aes(x = state, y = purchases)) +
+  geom_col() +
+  geom_text(aes(label = comma(purchases)), hjust = -0.1, size = 3.5) +
+  coord_flip() +
+  scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.12))) +
+  labs(
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank())
+```
+:::
+
+### Column {width="55%"}
+
+::: {.card title="Sessions and Purchases by Source / Medium"}
+```{r}
+source_medium_breakdown |>
+  mutate(
+    Sessions = comma(Sessions),
+    Purchases = comma(Purchases),
+    `Conversion Rate` = percent(`Conversion Rate`, accuracy = 0.1)
+  ) |>
+  rename(`Source / Medium` = source_medium) |>
+  gt()
+```
+:::
